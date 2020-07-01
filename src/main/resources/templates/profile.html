@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+    <form action="#" th:action="@{/profileEdit}" th:object="${u}" method="post">
+        <table border="0">
+            <tr th:if="${u.id}">
+                <td>companyTitle: <input type="text" size="40" th:field="*{companyTitle}"/>
+                <td>emial: <input type="text" size="40" th:field="*{email}"/>
+                <td>><input type="submit" value="Edit Profile"/> </td>
+            </tr>
+        </table>
+
+    </form>
+    <div th:if="${errorMessage}" th:utext="${errorMessage}" class="error" />
+</body>
+</html>

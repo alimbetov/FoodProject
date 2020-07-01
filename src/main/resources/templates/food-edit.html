@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title th:text="${add} ? 'Create a Food' : 'Edit a Food'" />
+</head>
+<body>
+<h1 th:text="${add} ? 'Create a Food:' : 'Edit a Food:'" />
+<a th:href="@{/foods/list}">Back to Packs List</a>
+<br/><br/>
+<form th:action="${add} ? @{/foods/add} : @{/foods/{foodid}/edit(foodid=${m_food.id})}"
+      th:object="${m_food}" method="POST">
+    <table border="1" style="width:50%">
+
+        <tr th:if="${m_food.id}">
+            <td>ID</td>
+            <td th:utext="${m_food.id}">...</td>
+        </tr>
+    <tr>
+        <td>foodName:</td>
+        <td><input type="text" size="40" th:field="*{foodName}"/>
+        <div th:if="${#fields.hasErrors('foodName')}" th:errors="*{foodName}"/>
+    </tr>
+
+    <tr>
+        <td>foodDescription:</td>
+        <td><input type="text" size="50" th:field="*{foodDescription}"/>
+            <div th:if="${#fields.hasErrors('foodDescription')}" th:errors="*{foodDescription}"/>
+    </tr>
+     <tr>
+            <td>foodCategory:</td>
+            <td>
+                <select name="Food Category" th:field="*{foodCategory}">
+                    <option th:each="colorOpt : ${T(com.food.demo.model.enums.FoodCategory).values()}"
+                            th:value="${colorOpt}" th:text="${colorOpt}"></option>
+                </select>
+                </td>
+                <div th:if="${#fields.hasErrors('foodCategory')}" th:errors="*{foodCategory}"/>
+        </tr>
+
+        <tr>
+            <td>price:</td>
+            <td><input type="text" size="50" th:field="*{price}"/>
+                <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}"/>
+        </tr>
+
+        <tr>
+            <td>weight:</td>
+            <td><input type="text" size="50" th:field="*{weight}"/>
+                <div th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"/>
+        </tr>
+
+        <tr>
+            <td>image:</td>
+            <input type="file" name="file" th:field="*{image}"/>
+            <img th:src="@{/image/${m_food.id}}" />
+
+
+        </tr>
+
+        <tr>
+            <td>Active:</td>
+            <td>
+                <select class="form-control" th:field="*{active}">
+                    <option th:value="1" >true</option>
+                    <option th:value="0" >false</option>
+                </select>
+        </tr>
+
+
+    </table>
+
+    <input type="submit" th:value="${add} ? 'Create' : 'Update'" />
+</form>
+
+<br/>
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}" class="error" />
+</body>
+</html>

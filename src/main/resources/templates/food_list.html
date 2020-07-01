@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Food Manager</title>
+</head>
+<body>
+<div align="center">
+    <h1>Pack List</h1>
+
+    <div>
+        <nobr>
+            <a th:href="@{/foods/add}">Add new Container</a> |
+            <a th:href="@{/}">Back to Index</a>
+        </nobr>
+    </div>
+
+    <br/><br/>
+    <div>
+        <nobr>
+            <span th:if="${hasPrev}"><a th:href="@{/foods/list?page={prev}(prev=${prev})}">Prev</a>&nbsp;&nbsp;&nbsp;</span>
+            <span th:if="${hasNext}"><a th:href="@{/foods/list?page={next}(next=${next})}">Next</a></span>
+        </nobr>
+    </div>
+    <br/><br/>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>foodName</th>
+            <th>foodDescription</th>
+            <th>foodCategory</th>
+            <th>price</th>
+            <th>weight</th>
+            <th>active</th>
+<th>image</th>
+
+            <th>Edition</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="f : ${listFoods}">
+            <td th:text="${f.id}">ID</td>
+            <td th:text="${f.foodName}">foodName</td>
+            <td th:text="${f.foodDescription}">foodDescription</td>
+            <td th:text="${f.foodCategory}">foodCategory</td>
+            <td th:text="${f.price}">price</td>
+            <td th:text="${f.weight}">weight</td>
+            <td th:text="${f.active}">active</td>
+
+            <td><img th:src="@{/image/${f.id}}" /></td>
+
+           <td><div th:if="not ${allowDelete}">
+                    <a th:href="@{/foods/{foodid}/edit(foodid=${f.id})}">Edit</a> |
+                    <a th:href="@{/foods/{foodid}/delete(foodid=${f.id})}">Delete</a>
+                </div>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

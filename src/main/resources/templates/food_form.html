@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>View Food</title>
+
+</head>
+<body>
+<h1>View Food</h1>
+<a th:href="@{/foods/list}">Back to Food List</a>
+<br/><br/>
+
+<table border="0">
+    <tr>
+        <td>Food :</td>
+        <td>foodName:<input type="text" th:field="${m_food.foodName}" /></td>
+        <td>foodDescription:<input type="text" th:field="${m_food.foodDescription}" /></td>
+        <td>foodCategory:<input type="text" th:field="${m_food.foodCategory}" /></td>
+        <td>price:<input type="text" th:field="${m_food.price}" /></td>
+        <td>weight:<input type="text" th:field="${m_food.weight}" /></td>
+        <td>image:<img th:src="@{/image/${m_food.id}}" /></td>
+    </tr>
+</table>
+
+    <br/><br/>
+    <div th:if="not ${allowDelete}">
+        <a th:href="@{/foods/{foodid}/edit(foodid=${m_food.id})}">Edit</a> |
+        <a th:href="@{/foods/{foodid}/delete(foodid=${m_food.id})}">Delete</a>
+    </div>
+    <form th:if="${allowDelete}" th:action="@{/foods/{foodid}/delete(foodid=${m_food.id})}" method="POST">
+        Delete this Food? <input type="submit" th:value="Yes" />
+    </form>
+</div>
+<div th:if="${errorMessage}" th:utext="${errorMessage}" class="error" />
+</body>
+</html>
