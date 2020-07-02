@@ -1,11 +1,10 @@
 package com.food.demo.controllers;
 
 import com.food.demo.model.Food;
-import com.food.demo.model.ImageUtil;
 import com.food.demo.model.User;
-import com.food.demo.model.enums.FoodCategory;
 import com.food.demo.services.FoodService;
 import com.food.demo.services.JpaUserDetailsService;
+import com.food.demo.utils.ImageUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
