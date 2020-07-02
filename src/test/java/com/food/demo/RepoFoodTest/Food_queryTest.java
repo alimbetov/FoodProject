@@ -11,9 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.util.ResourceUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,9 +31,6 @@ public class Food_queryTest {
 
     @Autowired
     UserRepository userRepo;
-
-    @Value("classpath:sample.jpg")
-    Resource resourceFile;
 
     @Test
     public void getloadUserByUsername() {
@@ -82,7 +77,7 @@ public class Food_queryTest {
         food.setFoodName("Шарик");
 
         try {
-            File image = resourceFile.getFile();
+            File image = new ClassPathResource("sample.jpg").getFile();
             try (FileInputStream inputStream = new FileInputStream(image)) {
                 food.setImage(Files.readAllBytes(image.toPath()));
                 Food result = foodrepo.save(food);

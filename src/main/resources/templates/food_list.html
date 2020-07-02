@@ -49,7 +49,8 @@
             <td th:text="${f.weight}">weight</td>
             <td th:text="${f.active}">active</td>
 
-            <td><img th:src="@{/image/${f.id}}" /></td>
+<!--            <td><img th:src="@{/image/${f.id}}" /></td>-->
+            <td> <img th:src="@{'data:image/jpeg;base64,'+${f.image}}" /></td>
 
            <td><div th:if="not ${allowDelete}">
                     <a th:href="@{/foods/{foodid}/edit(foodid=${f.id})}">Edit</a> |

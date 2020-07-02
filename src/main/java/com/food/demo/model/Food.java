@@ -1,5 +1,6 @@
 package com.food.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.food.demo.model.enums.FoodCategory;
 import org.hibernate.annotations.Type;
 
@@ -10,7 +11,7 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity(name = "food")
-@Table (name ="food")
+@Table(name = "food")
 public class Food {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,6 +28,7 @@ public class Food {
     private boolean isActive;
 
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "food_user_id", nullable = false)
     private User user;
@@ -38,13 +40,10 @@ public class Food {
     private Set<FoodCategory> foodCategory;
 
 
-
     @Lob
-    @Type(type="org.hibernate.type.BinaryType")
-    @Column(name="food_image")
+    @Type(type = "org.hibernate.type.BinaryType")
+    @Column(name = "food_image")
     private byte[] image;
-
-
 
 
     public byte[] getImage() {
@@ -119,7 +118,6 @@ public class Food {
     public void setUser(User user) {
         this.user = user;
     }
-
 
 
 }

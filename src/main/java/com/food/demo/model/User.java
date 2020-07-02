@@ -1,5 +1,6 @@
 package com.food.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.food.demo.model.enums.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,6 +30,7 @@ public class User implements UserDetails {
     @CollectionTable(name = "food_user_role", joinColumns = @JoinColumn(name = "food_user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
+
 
     @OneToMany(mappedBy = "user", cascade=CascadeType.ALL, orphanRemoval=true,fetch = FetchType.LAZY)
     private Set<Food> foods = new HashSet<>();
