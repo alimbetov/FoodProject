@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class FoodService {
         return null;
     }
 
-
+    @Transactional
     public Food createOrUpdateFood(Food entity)
     {
         Optional<Food> myFood = foodRepository.findById(entity.getId());
@@ -89,7 +90,7 @@ public class FoodService {
         foodRepository.findAll(sortedByIdAsc).forEach(foodlist::add);
         return foodlist;
     }
-
+    @Transactional
     public  Food save(Food food)  {
         if (!StringUtils.isEmpty(food.getFoodName())) {
             if (existsById(food.getId())) {

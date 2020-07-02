@@ -25,10 +25,10 @@ public interface FoodRepositoryCRUD
 
 
 
-    @Query(value = "SELECT * FROM Food u WHERE u.isActive=1 and u.user = :user",
+    @Query(value = "SELECT * FROM Food u WHERE u.is_active=true and u.food_user_id = :id",
             nativeQuery = true)
-    Collection<User>  findUserByStatusAndNameNamedParamsNative(
-            @Param("user") User user);
+    Collection<Food>  findUserByStatusAndNameNamedParamsNative(
+            @Param("id") Long id);
 
 
 }
