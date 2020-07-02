@@ -1,6 +1,7 @@
 package com.food.demo.controllers;
 
 import com.food.demo.model.Food;
+import com.food.demo.model.ImageUtil;
 import com.food.demo.model.User;
 import com.food.demo.model.enums.FoodCategory;
 import com.food.demo.services.FoodService;
@@ -47,6 +48,7 @@ public class FoodController {
         boolean hasNext = (pageNumber * ROW_PER_PAGE) < count;
 
         model.addAttribute("listFoods", foods);
+        model.addAttribute("imgUtil", new ImageUtil());
         model.addAttribute("hasPrev", hasPrev);
         model.addAttribute("prev", pageNumber - 1);
         model.addAttribute("hasNext", hasNext);
