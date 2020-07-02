@@ -1,9 +1,7 @@
 package com.food.demo.model;
 
-import com.food.demo.model.User;
 import com.food.demo.model.enums.FoodCategory;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.annotations.Type;
 
 
 import javax.persistence.*;
@@ -42,6 +40,7 @@ public class Food {
 
 
     @Lob
+    @Type(type="org.hibernate.type.BinaryType")
     @Column(name="food_image")
     private byte[] image;
 
