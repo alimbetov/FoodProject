@@ -85,8 +85,12 @@ public class FoodService {
 
     public List<Food> findAll(int pageNumber, int rowPerPage) {
         List<Food> foodlist = new ArrayList<>();
-        Pageable sortedByIdAsc = PageRequest.of(pageNumber - 1, rowPerPage,
+
+        Pageable sortedByIdAsc = PageRequest.of(
+                pageNumber - 1,
+                rowPerPage,
                 Sort.by("id").ascending());
+
         foodRepository.findAll(sortedByIdAsc).forEach(foodlist::add);
         return foodlist;
     }
@@ -107,6 +111,7 @@ public class FoodService {
 
     public void  update(Food food) {
         if (!StringUtils.isEmpty(food.getFoodName())) {
+
             if (!existsById(food.getId())) {
                 System.out.println("Cannot find Contact with id: " + food.getId());
             }

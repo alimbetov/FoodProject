@@ -40,9 +40,12 @@ public class FoodController {
     public String getStates_list(Model model,
                                  @RequestParam(value = "page", defaultValue = "1") int pageNumber
     ) {
-        List<Food> foods = foodService.findAll(pageNumber, ROW_PER_PAGE);
 
+
+        List<Food> foods = foodService.findAll(pageNumber, ROW_PER_PAGE);
         long count = foodService.count();
+
+
         boolean hasPrev = pageNumber > 1;
         boolean hasNext = (pageNumber * ROW_PER_PAGE) < count;
 
@@ -65,12 +68,7 @@ public class FoodController {
         if (userFromDB != null) {
             myFood.setUser(userFromDB);
         }
-
-        model.addAttribute("standardDate", new Date());
-        model.addAttribute("localDateTime", LocalDateTime.now());
-        model.addAttribute("localDate", LocalDate.now());
-        model.addAttribute("timestamp", Instant.now());
-
+        model.addAttribute("imgUtil", new ImageUtil());
         model.addAttribute("add", true);
         model.addAttribute("m_food", myFood);
         return "food-edit";
@@ -88,11 +86,8 @@ public class FoodController {
 
             if (bindingResult.hasErrors()) {
 
-                model.addAttribute("standardDate", new Date());
-                model.addAttribute("localDateTime", LocalDateTime.now());
-                model.addAttribute("localDate", LocalDate.now());
-                model.addAttribute("timestamp", Instant.now());
 
+                model.addAttribute("imgUtil", new ImageUtil());
                 model.addAttribute("add", true);
                 return "food-edit";
             } else {
@@ -112,11 +107,8 @@ public class FoodController {
             // log exception first,
             // then show error
             errorMessage = ex.getMessage();
-            model.addAttribute("standardDate", new Date());
-            model.addAttribute("localDateTime", LocalDateTime.now());
-            model.addAttribute("localDate", LocalDate.now());
-            model.addAttribute("timestamp", Instant.now());
 
+            model.addAttribute("imgUtil", new ImageUtil());
             model.addAttribute("errorMessage", errorMessage);
             model.addAttribute("add", true);
             return "food-edit";
@@ -130,11 +122,8 @@ public class FoodController {
 
         try {
             food = foodService.getFoodById(foodid);
-            model.addAttribute("standardDate", new Date());
-            model.addAttribute("localDateTime", LocalDateTime.now());
-            model.addAttribute("localDate", LocalDate.now());
-            model.addAttribute("timestamp", Instant.now());
 
+            model.addAttribute("imgUtil", new ImageUtil());
             model.addAttribute("add", false);
             model.addAttribute("m_food", food);
         } catch (Exception ex) {
@@ -164,15 +153,13 @@ public class FoodController {
 
 
             foodService.update(food);
+            model.addAttribute("imgUtil", new ImageUtil());
             return "redirect:/foods/" + String.valueOf(food.getId()) + "/edit";
         } catch (Exception ex) {
             String errorMessage = ex.getMessage();
 
-            model.addAttribute("standardDate", new Date());
-            model.addAttribute("localDateTime", LocalDateTime.now());
-            model.addAttribute("localDate", LocalDate.now());
-            model.addAttribute("timestamp", Instant.now());
 
+            model.addAttribute("imgUtil", new ImageUtil());
             model.addAttribute("errorMessage", errorMessage);
             model.addAttribute("add", false);
             return "food-edit";
@@ -191,10 +178,10 @@ public class FoodController {
             model.addAttribute("localDateTime", LocalDateTime.now());
             model.addAttribute("localDate", LocalDate.now());
             model.addAttribute("timestamp", Instant.now());
-
+            model.addAttribute("imgUtil", new ImageUtil());
             model.addAttribute("errorMessage", "Food not found");
         }
-
+        model.addAttribute("imgUtil", new ImageUtil());
         model.addAttribute("allowDelete", true);
         model.addAttribute("m_food", food);
         return "food_form";
@@ -213,7 +200,7 @@ public class FoodController {
             model.addAttribute("localDateTime", LocalDateTime.now());
             model.addAttribute("localDate", LocalDate.now());
             model.addAttribute("timestamp", Instant.now());
-
+            model.addAttribute("imgUtil", new ImageUtil());
             model.addAttribute("errorMessage", errorMessage);
             return "food_form";
         }

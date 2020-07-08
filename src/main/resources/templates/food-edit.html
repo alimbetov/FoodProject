@@ -8,6 +8,9 @@
 <h1 th:text="${add} ? 'Create a Food:' : 'Edit a Food:'" />
 <a th:href="@{/foods/list}">Back to Packs List</a>
 <br/><br/>
+
+
+
 <form th:action="${add} ? @{/foods/add} : @{/foods/{foodid}/edit(foodid=${m_food.id})}"
       th:object="${m_food}" method="POST">
     <table border="1" style="width:50%">
@@ -51,27 +54,34 @@
         </tr>
 
         <tr>
-            <td>image:</td>
-            <input type="file" name="file" th:field="*{image}"/>
-            <img th:src="@{/image/${m_food.id}}" />
+            <td><a th:href="@{/fotoloader/{foodid}/edit(foodid=${m_food.id})}">Image Edit</a> </td>
+            <td><input type=hidden size="50" th:field="*{image}"/>
+
+                <P th:if="${m_food.image}">
+                    <img class='img-thumbnail' th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(m_food.image)}"/>
+                <P>
+            </td>
+            <tr>
 
 
-        </tr>
-
-        <tr>
             <td>Active:</td>
             <td>
                 <select class="form-control" th:field="*{active}">
-                    <option th:value="1" >true</option>
-                    <option th:value="0" >false</option>
+                    <option th:value="1">true</option>
+                    <option th:value="0">false</option>
                 </select>
         </tr>
+
+
 
 
     </table>
 
     <input type="submit" th:value="${add} ? 'Create' : 'Update'" />
 </form>
+
+
+
 
 <br/>
 

@@ -21,12 +21,13 @@ public class Food {
 
     private String foodDescription;
 
-    private BigDecimal Price;
+    private BigDecimal price;
 
-    private BigDecimal Weight;
+    private BigDecimal weight;
 
     private boolean isActive;
 
+    private Date releaseDate;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -44,6 +45,9 @@ public class Food {
     @Type(type = "org.hibernate.type.BinaryType")
     @Column(name = "food_image")
     private byte[] image;
+
+    public Food() {
+    }
 
 
     public byte[] getImage() {
@@ -79,20 +83,12 @@ public class Food {
         this.foodDescription = foodDescription;
     }
 
-    public BigDecimal getPrice() {
-        return Price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        Price = price;
-    }
-
     public BigDecimal getWeight() {
-        return Weight;
+        return weight;
     }
 
     public void setWeight(BigDecimal weight) {
-        Weight = weight;
+        this.weight = weight;
     }
 
     public boolean isActive() {
@@ -119,5 +115,21 @@ public class Food {
         this.user = user;
     }
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "RELEASE_DATE")
+    public Date getReleaseDate() {
+        return releaseDate;
+    }
 
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 }

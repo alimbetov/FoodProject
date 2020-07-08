@@ -7,11 +7,11 @@
 </head>
 <body>
 <div align="center">
-    <h1>Pack List</h1>
+    <h1>Food List</h1>
 
     <div>
         <nobr>
-            <a th:href="@{/foods/add}">Add new Container</a> |
+            <a th:href="@{/foods/add}">Add new Food</a> |
             <a th:href="@{/}">Back to Index</a>
         </nobr>
     </div>
@@ -34,8 +34,6 @@
             <th>price</th>
             <th>weight</th>
             <th>active</th>
-<th>image</th>
-
             <th>Edition</th>
         </tr>
         </thead>
@@ -49,14 +47,18 @@
             <td th:text="${f.weight}">weight</td>
             <td th:text="${f.active}">active</td>
 
-<!--            <td><img th:src="@{/image/${f.id}}" /></td>-->
-            <td> <img class='img-thumbnail' th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(f.image)}" /></td>
 
-        <!--    <img  th:src="'data:image/jpeg;base64,' + ${com.food.demo.utils.ImageUtil.getImgData(f.image)}" />
--->
-            </td>
+<!--            <td>
+                <P th:if="${f.image}">
+                <img class='img-thumbnail' th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(f.image)}" />
+                </P>
+            </td>-->
+
+
+
             <td><div th:if="not ${allowDelete}">
                     <a th:href="@{/foods/{foodid}/edit(foodid=${f.id})}">Edit</a> |
+                <a th:href="@{/fotoloader/{foodid}/edit(foodid=${f.id})}">Image</a> |
                     <a th:href="@{/foods/{foodid}/delete(foodid=${f.id})}">Delete</a>
                 </div>
 

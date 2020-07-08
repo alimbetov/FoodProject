@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Food image Editor</title>
+</head>
+<body>
+<h1>Food image Editor</h1>
+
+
+<a th:href="@{/foods/{foodid}/edit(foodid=${FoodImage.id})}">Edit Description</a>
+
+<form  th:action="@{/uploadOneFile}" th:object="${FoodImage}"
+      enctype="multipart/form-data" method="post">
+    <input type=hidden th:field="*{id}" />
+    <input type="text" th:field="*{foodName}" /></p>
+    File to upload:</td><td><input th:type="file"  th:name="file" />
+    <P th:if="${FoodImage.image}"><img class='img-thumbnail' th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(FoodImage.image)}"/><P>
+    <p><input type="submit" value="Submit" /></p>
+</form>
+
+<!--<form action="savefile" method="post" enctype="multipart/form-data">
+    Select File: <input type="file" name="file"/>
+    <input type="submit" value="Upload File"/>
+</form>-->
+
+
+
+</body>
+</html>

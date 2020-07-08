@@ -18,7 +18,10 @@
         <td>foodCategory:<input type="text" th:field="${m_food.foodCategory}" /></td>
         <td>price:<input type="text" th:field="${m_food.price}" /></td>
         <td>weight:<input type="text" th:field="${m_food.weight}" /></td>
-        <td>image:<img th:src="@{/image/${m_food.id}}" /></td>
+        <td>image:
+            <P th:if="${m_food.image}">
+            <img class='img-thumbnail' th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(m_food.image)}"/>
+           <P></td>
     </tr>
 </table>
 
